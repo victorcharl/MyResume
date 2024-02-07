@@ -2,23 +2,24 @@ import ThemeSwitch from "@/components/theme-switch";
 import { generalData } from "@/data/general";
 import { contentData } from "@/data/content";
 import type { Content } from "@/data/content";
+import { skillsData } from "@/data/content";
 
 type ContentProps = Content;
 
 const Content: React.FC<ContentProps> = ({ title, items }) => {
   return (
-    <section className="my-10 text-sm relative">
+    <section className="my-2 text-sm relative">
       <div className="absolute top-10 right-0">
       </div>
-      <h3 className="mb-6">{title}</h3>
-      <div className="flex flex-col gap-6">
+      <h3 className="mb-4 uppercase">{title}</h3>
+      <div className="flex flex-col gap-4">
         {items.map((item, index) => {
           return (
             <div className="flex" key={index}>
-              <div className="mr-8 max-w-[100px] w-full text-slate-400 dark:text-slate-400">
+              <div className="mr-12 max-w-[100px] w-full text-slate-400 dark:text-slate-400">
                 {item.date}
               </div>
-              <div className="flex flex-col flex-1">
+              <div className="flex flex-col flex-1" >
                 <h4>{item.title}</h4>
                 <p className="text-slate-600 dark:text-gray-400">
                   {item.subTitle}
@@ -33,8 +34,7 @@ const Content: React.FC<ContentProps> = ({ title, items }) => {
           );
         })}
       </div>
-      {/* Line design */}
-      <div className="absolute bottom-0 left-0 right-0 border-t border-gray-200 dark:border-gray-600"></div>
+      <div className="border-b-2 border-gray-200 dark:border-gray-600 my-2" />
     </section>
   );
 };
@@ -42,11 +42,11 @@ const Content: React.FC<ContentProps> = ({ title, items }) => {
 export default function Home() {
   return (
     <>
-      <main className="max-w-xl mx-auto px-6 py-20 relative min-h-screen font-light">
+      <main className="max-w-3xl mx-auto px-6 py-20 relative min-h-screen font-light">
         <div className="absolute top-6 right-6">
           <ThemeSwitch />
         </div>
-        <div className="text-center mb-8">
+        <div className="text-center border-b-2 border-gray-200 dark:border-gray-600">
           <h1 className="mb-2 text-2xl font-bold text-gray-900 dark:text-gray-100">
             {generalData.name}
           </h1>
@@ -54,49 +54,57 @@ export default function Home() {
             {generalData.jobTitle}
           </p>
           {generalData.website && (
-            <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">
+            <p className="mb-2 text-xs text-gray-500 dark:text-gray-400">
               <a
-                href={generalData.website}
+                href={`mailto:${generalData.website}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="hover:underline"
               >
-                {generalData.website
-                  .replace(/(^\w+:|^)\/\//, "")
-                  .replace("www.", "")}
+                {generalData.website}
               </a>
+              | {generalData.contact}
             </p>
           )}
         </div>
 
-        <section className="my-9 text-sm relative">
-          <h3 className="mb-1 text-slate-900 dark:text-slate-100">Summary</h3>
-          <div className="text-slate-600 dark:text-slate-300">
-            <p>{generalData.summary}</p>
+        <section className="text-sm relative border-b-2 border-gray-200 dark:border-gray-600 py-2">
+          <div className="flex justify-between gap-9 mb-1">
+            <h3 className="uppercase mr-3">Professional Summary</h3>
+            <div className="text-sm text-gray-600 dark:text-gray-400">
+              <p>{generalData.summary}</p>
+            </div>
           </div>
-          {/* Line design */}
-          <div className="absolute bottom-0 left-0 right-0 border-t border-gray-200 dark:border-gray-600"></div>
         </section>
 
+        <section className="my-3 text-sm relative border-b-2 border-gray-200 dark:border-gray-600 py-2">
+          <div className="flex gap-16 mb-1">
+            <h3 className="uppercase">Skill <br/> Highlights</h3>
+            <div className="text-sm text-gray-600 dark:text-gray-400">
+              {skillsData.map((skill, index) => (
+                <p key={index}> • {skill}</p>
+              ))}
+            </div>
+          </div>
+        </section>
+        
         {contentData.map((content, index) => {
           return <Content {...content} key={index} />;
         })}
 
-        <section className="my-14 text-sm relative">
-          <h3 className="mb-6 text-slate-900 dark:text-slate-100">Contact</h3>
-          <div className="flex flex-col gap-6">
-            {generalData.contacts.map((contact, index) => {
+        <section className="mt-6 text-sm relative">
+          <h3 className="mb-3 text-slate-900 dark:text-slate-100 uppercase">Websites</h3>
+          <div className="flex flex-col gap-1">
+            {generalData.websites.map((contact, index) => {
               return (
                 <div className="flex" key={index}>
-                  <div className="mr-8 max-w-[100px] w-full text-slate-400 dark:text-slate-400">
-                    {contact.label}
-                  </div>
                   <div className="flex flex-col flex-1 text-slate-900 dark:text-slate-100">
+                    <p>{contact.label}
                     <a
                       href={contact.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="hover:underline inline-flex"
+                      className="hover:underline inline-flex text-blue-700"
                     >
                       {contact.value}
                       <svg
@@ -112,13 +120,12 @@ export default function Home() {
                         ></path>
                       </svg>
                     </a>
+                    </p>
                   </div>
                 </div>
               );
             })}
           </div>
-          {/* Line design */}
-          <div className="absolute bottom-0 left-0 right-0 border-t border-gray-200 dark:border-gray-600"></div>
         </section>
       </main>
     </>

@@ -6,7 +6,8 @@ export const contentData = [
         title: "Junior Freelancer",
         subTitle: "Self Employed",
         date: "Aug 2020 - Present",
-        description: "Working globally, creating websites.",
+        description: 
+          "Developing global websites with tailored solutions for diverse needs. Utilizing expertise in HTML, CSS, JavaScript, and more to prioritize user experience and responsive design. Providing comprehensive support and maintenance, consistently exceeding client expectations."
       }
     ],
   },
@@ -49,6 +50,16 @@ export const contentData = [
   },
 ];
 
+export const skillsData: string[] = [
+  "Proficient in building responsive and user-friendly websites using HTML, CSS and Javascript to insure optimal user experience across devices.",
+  "Competent in utilizing Visual Studio Code for effecient web development.",
+  "Advance undestanding in creating Android App Development using Android Studio and Java.",
+  "Experienced with version control systems particularly  Git for code collaboration and tracking changes.",
+  "Possess a foundational understanding of C++, C# and mySQL acquired through college coursework.",
+  "Expertise in using Microsoft Suite such as Outlook, Excel, Word, Powerpoint etc.",
+  "Proficient in fast and accurate typing, allowing for swift data entry and efficient communication."
+];
+
 export type Content = {
   title: string;
   items: {
@@ -58,5 +69,6 @@ export type Content = {
     description: string;
   }[];
 };
+
 
 export type ContentData = Content[];
